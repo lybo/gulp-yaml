@@ -60,6 +60,9 @@ module.exports = function(options) {
         return callback();
       }
       try {
+        if (options.parseContents) {
+            file.contents = options.parseContents(file.contents, file.path, options);
+        }
         file.contents = yaml2json(file.contents, options);
         file.path = gutil.replaceExtension(file.path, '.json');
       }
